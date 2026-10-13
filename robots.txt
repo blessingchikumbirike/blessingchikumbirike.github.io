@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://blessingchikumbirike.github.io/sitemap.xml

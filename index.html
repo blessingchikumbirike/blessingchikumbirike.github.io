@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blessing Chikumbirike | Data scientist and machine learning engineer</title>
+<meta name="description" content="Portfolio of Blessing Chikumbirike, a data science graduate in Harare building explainable machine learning systems, dashboards and SQL analyses.">
+<meta property="og:title" content="Blessing Chikumbirike | Data scientist and machine learning engineer">
+<meta property="og:description" content="Explainable pneumonia detection with DenseNet121 and Grad-CAM, plus Python, SQL, Excel, Power BI and Tableau projects.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://blessingchikumbirike.github.io/images/pneumoinsight/analysis.webp">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23086a76'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' font-weight='700' text-anchor='middle' fill='white'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#edf0f1; --surface:#f8fafa; --tint:#e2e8ea;
+  --ink:#14222e; --muted:#53626d; --rule:#c9d1d6;
+  --accent:#086a76; --accent-ink:#ffffff; --heat:#e2452f;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --text:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --radius:6px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0c141b; --surface:#121c25; --tint:#17232e;
+    --ink:#e6edf1; --muted:#9aa9b4; --rule:#26343f;
+    --accent:#52c4d2; --accent-ink:#06222a; --heat:#ff6b52;
+    color-scheme:dark;
+  }
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:4.5rem}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--text);font-size:1.0625rem;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:.2em}
+a:hover{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:3px}
+.skip{position:absolute;left:-999px;top:0;background:var(--ink);color:var(--bg);padding:.6rem 1rem;z-index:50}
+.skip:focus{left:1rem;top:1rem}
+.wrap{width:min(1120px,100% - 2rem);margin-inline:auto}
+h1,h2,h3{font-family:var(--display);letter-spacing:-.015em;line-height:1.1;margin:0;font-weight:600}
+p{margin:0 0 1em;max-width:62ch}
+
+/* top bar */
+.bar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:3.5rem}
+.brand{font-family:var(--display);font-weight:700;font-size:1.05rem;text-decoration:none;letter-spacing:-.01em}
+.bar nav{display:flex;align-items:center;gap:1.4rem;font-family:var(--display);font-weight:500;font-size:.95rem}
+.bar nav a{text-decoration:none}
+.bar nav a:not(.btn):hover{text-decoration:underline;text-decoration-color:var(--accent)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:600;font-size:.95rem;line-height:1;padding:.8rem 1.15rem;border-radius:var(--radius);text-decoration:none;border:2px solid var(--ink);background:var(--ink);color:var(--bg);cursor:pointer}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.quiet{background:transparent;color:var(--ink)}
+.btn.quiet:hover{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.btn.small{padding:.55rem .85rem;font-size:.88rem}
+
+/* hero */
+.hero{padding:clamp(2.5rem,7vw,5.5rem) 0 clamp(3rem,7vw,5rem)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(2rem,6vw,5rem);align-items:center}
+.hero h1{font-size:clamp(2.5rem,6.4vw,4.6rem);font-weight:700;letter-spacing:-.03em;line-height:1.02;max-width:12ch}
+.hero .lede{font-size:1.2rem;margin-top:1.5rem;max-width:44ch}
+.hero .actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
+.hero .where{margin-top:1.75rem;color:var(--muted);font-size:.98rem}
+
+.compare{position:relative;margin:0;border-radius:var(--radius);overflow:hidden;background:#000;touch-action:pan-y;aspect-ratio:1/1;user-select:none}
+.compare img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.compare .top{clip-path:inset(0 0 0 var(--pos,50%))}
+.compare .line{position:absolute;top:0;bottom:0;left:var(--pos,50%);width:2px;background:#fff;box-shadow:0 0 0 1px rgb(0 0 0/.25);transform:translateX(-1px);pointer-events:none}
+.compare .knob{position:absolute;top:50%;left:var(--pos,50%);width:2.75rem;height:2.75rem;margin:-1.375rem 0 0 -1.375rem;border-radius:50%;background:#fff;color:#14222e;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:.95rem;box-shadow:0 2px 10px rgb(0 0 0/.35);pointer-events:none}
+.compare .tag{position:absolute;bottom:.75rem;padding:.3rem .6rem;border-radius:4px;background:rgb(10 20 28/.78);color:#fff;font-family:var(--display);font-size:.8rem;font-weight:500;pointer-events:none}
+.compare .tag.l{left:.75rem}.compare .tag.r{right:.75rem}
+.compare input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize}
+.compare:focus-within{outline:3px solid var(--accent);outline-offset:3px}
+.hero figcaption{margin-top:.8rem;color:var(--muted);font-size:.93rem;max-width:none}
+
+/* sections */
+.sec{padding:clamp(3rem,7vw,5.5rem) 0;border-top:1px solid var(--rule)}
+.sec .wrap{display:grid;grid-template-columns:210px minmax(0,1fr);gap:clamp(1.5rem,5vw,4rem)}
+.sec .head{align-self:start;position:sticky;top:5rem}
+.sec h2{font-size:1.75rem}
+.sec .head p{color:var(--muted);font-size:.95rem;margin-top:.7rem}
+.sec h3{font-size:1.35rem;margin:3rem 0 .8rem}
+.sec h3:first-child{margin-top:0}
+.sec .body > p:first-child{font-size:1.18rem}
+.note{padding:.9rem 1.1rem;border-left:4px solid var(--accent);background:var(--tint);border-radius:0 var(--radius) var(--radius) 0;font-size:.98rem;max-width:62ch;margin:1.4rem 0 0}
+
+.links{display:flex;flex-wrap:wrap;gap:.75rem;margin:1.2rem 0 0}
+figure.shot{margin:1.6rem 0 0}
+figure.shot button{all:unset;display:block;cursor:zoom-in;width:100%;border-radius:var(--radius);overflow:hidden;border:1px solid var(--rule);background:var(--surface)}
+figure.shot button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+figure.shot img{width:100%}
+figcaption{color:var(--muted);font-size:.93rem;margin-top:.6rem;max-width:62ch}
+.pair{display:grid;grid-template-columns:1.25fr 1fr;gap:1.25rem;align-items:start}
+
+/* results table */
+.tablewrap{overflow-x:auto;margin-top:1.4rem;border:1px solid var(--rule);border-radius:var(--radius);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-family:var(--display);font-size:.98rem;font-variant-numeric:tabular-nums}
+th,td{text-align:right;padding:.8rem 1rem;border-bottom:1px solid var(--rule);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+thead th{font-weight:500;color:var(--muted);font-size:.9rem}
+tbody tr:last-child td{border-bottom:0}
+tr.win > *{font-weight:700;background:color-mix(in srgb,var(--accent) 12%,transparent)}
+tr.win > :first-child{box-shadow:inset 4px 0 0 var(--accent)}
+.good{color:var(--accent)}
+
+/* tiers */
+.tiers{margin-top:1.4rem;display:grid;gap:.6rem}
+.tier{display:grid;grid-template-columns:150px 1fr;gap:1rem;padding:1rem;border-radius:var(--radius);border:1px solid var(--rule)}
+.tier:nth-child(1){background:var(--surface)}
+.tier:nth-child(2){background:color-mix(in srgb,var(--accent) 10%,var(--surface))}
+.tier:nth-child(3){background:color-mix(in srgb,var(--accent) 22%,var(--surface))}
+.tier h4{margin:0;font-family:var(--display);font-size:1rem;font-weight:600;line-height:1.25}
+.tier h4 span{display:block;font-weight:500;color:var(--muted);font-size:.85rem}
+.tier ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.6rem}
+.tier li{font-size:.9rem;line-height:1.4;padding:.6rem .7rem;background:var(--bg);border-radius:4px;border:1px solid var(--rule)}
+.tier li b{display:block;font-family:var(--display);font-weight:600;font-size:.92rem}
+.tier li small{color:var(--muted);font-size:.85rem}
+
+/* tabs */
+.tabs{margin-top:1.6rem}
+[role=tablist]{display:flex;gap:.4rem;flex-wrap:wrap}
+[role=tab]{font:600 .92rem/1 var(--display);padding:.7rem 1rem;border-radius:var(--radius);border:2px solid var(--rule);background:transparent;color:var(--ink);cursor:pointer}
+[role=tab][aria-selected=true]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+[role=tabpanel]{margin-top:1rem}
+.panel{display:grid;grid-template-columns:minmax(0,420px) 1fr;gap:1.5rem;align-items:start}
+.panel.wide{grid-template-columns:minmax(0,1fr)}
+
+/* projects */
+.proj{list-style:none;margin:0;padding:0}
+.proj li{display:grid;grid-template-columns:minmax(0,280px) 1fr;gap:1.5rem;padding:1.6rem 0;border-top:1px solid var(--rule)}
+.proj li:first-child{border-top:0;padding-top:0}
+.proj .thumb{display:block;aspect-ratio:16/10;overflow:hidden;border-radius:var(--radius);border:1px solid var(--rule);background:var(--tint)}
+.proj .thumb img{width:100%;height:100%;object-fit:cover;object-position:top left}
+.proj h3{font-size:1.25rem;margin:0 0 .3rem}
+.proj .tools{font-family:var(--display);font-weight:500;font-size:.9rem;color:var(--accent);margin:0 0 .6rem}
+.proj p{margin-bottom:.8rem;font-size:1rem}
+
+/* skills / about */
+.skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.6rem 2.5rem;margin:0}
+.skills dt{font-family:var(--display);font-weight:600;margin-bottom:.25rem}
+.skills dd{margin:0;color:var(--muted);font-size:1rem;line-height:1.55}
+.edu{margin-top:2rem;padding-top:1.4rem;border-top:1px solid var(--rule)}
+.edu b{font-family:var(--display);font-weight:600}
+
+.contact .mail{font-family:var(--display);font-weight:700;font-size:clamp(1.4rem,4.2vw,2.5rem);letter-spacing:-.02em;word-break:break-word}
+.contact ul{list-style:none;padding:0;margin:1.5rem 0 0;display:flex;flex-wrap:wrap;gap:.5rem 1.6rem;font-family:var(--display);font-weight:500}
+footer{padding:2rem 0 3rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.92rem}
+
+dialog{border:0;padding:0;background:transparent;max-width:min(1200px,96vw);width:96vw;max-height:94vh;overflow:visible}
+dialog::backdrop{background:rgb(6 12 18/.82)}
+dialog img{margin:auto;max-height:86vh;width:auto;border-radius:var(--radius);background:#fff}
+dialog form{text-align:center;margin-top:.8rem}
+
+@media (max-width:860px){
+  .hero .wrap{grid-template-columns:1fr}
+  .hero h1{max-width:14ch}
+  .compare{max-width:460px}
+  .sec .wrap{grid-template-columns:minmax(0,1fr);gap:1.2rem}
+  .sec .head{position:static}
+  .pair,.panel{grid-template-columns:1fr}
+  .proj li{grid-template-columns:1fr;gap:1rem}
+  .skills{grid-template-columns:1fr}
+  .tier{grid-template-columns:1fr;gap:.6rem}
+}
+@media (max-width:620px){
+  .bar nav a:not(.btn){display:none}
+  table{min-width:0;font-size:.76rem}
+  th,td{padding:.6rem .3rem;white-space:normal}
+  th:first-child,td:first-child{padding-left:.7rem;min-width:5.5rem}
+  th:last-child,td:last-child{padding-right:.7rem}
+  th:nth-child(3),td:nth-child(3){display:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="#top">Blessing Chikumbirike</a>
+    <nav aria-label="Main">
+      <a href="#pneumoinsight">PneumoInsight</a>
+      <a href="#projects">Data projects</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a class="btn small" href="Blessing_Chikumbirike_CV.pdf" download>Download CV</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <h1>Machine learning that shows its reasoning.</h1>
+      <p class="lede">I'm Blessing, a data science graduate in Harare. My capstone flags pneumonia on chest X-rays and highlights the lung regions behind every call, so a clinician can check the model instead of trusting it blindly.</p>
+      <div class="actions">
+        <a class="btn" href="#pneumoinsight">See the PneumoInsight case study</a>
+        <a class="btn quiet" href="Blessing_Chikumbirike_CV.pdf" download>Download CV</a>
+      </div>
+      <p class="where">Open to remote junior data science, machine learning and computer vision roles.</p>
+    </div>
+    <figure style="margin:0">
+      <div class="compare" id="compare" style="--pos:100%">
+        <img src="images/pneumoinsight/xray.webp" alt="Chest X-ray of a child with signs of pneumonia" width="376" height="375">
+        <img class="top" src="images/pneumoinsight/heatmap.webp" alt="The same X-ray with a Grad-CAM heatmap, red over the upper lung fields where the model found pneumonia" width="376" height="375">
+        <span class="line"></span>
+        <span class="knob" aria-hidden="true">&harr;</span>
+        <span class="tag l">Original X-ray</span>
+        <span class="tag r">What the model used</span>
+        <input type="range" min="0" max="100" value="100" aria-label="Drag to reveal the Grad-CAM heatmap over the X-ray">
+      </div>
+      <figcaption>Drag across the image. Red marks the regions DenseNet121 relied on for its pneumonia prediction.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec" id="pneumoinsight">
+  <div class="wrap">
+    <div class="head">
+      <h2>PneumoInsight</h2>
+      <p>BSc Honours capstone, University of Zimbabwe, 2025 to 2026</p>
+    </div>
+    <div class="body">
+      <p>PneumoInsight is a web application for explainable pneumonia detection. A clinician uploads a chest X-ray and gets a diagnosis, a confidence tier and a heatmap of the regions that drove the decision. Every result can be exported as a PDF report.</p>
+      <p class="note">PneumoInsight is an academic research prototype and not a medical device. It runs on my own machine, so this page shows screenshots in place of a live demo. I'm happy to walk through it on a call.</p>
+      <p class="links"><a class="btn small" href="https://github.com/blessingchikumbirike/PneumoInsight">View code on GitHub</a></p>
+
+      <h3>Three models, one winner</h3>
+      <p>I trained a custom CNN, ResNet-50 and DenseNet121 on the public Kermany pediatric chest X-ray dataset and compared them on its 624-image test set, which played no part in training. DenseNet121 scored highest on accuracy, recall, F1 and AUC, so it powers the application. For screening, recall is the number to watch, because a missed case costs more than a false alarm. DenseNet121 caught 367 of the 390 pneumonia cases.</p>
+      <div class="tablewrap">
+        <table>
+          <caption class="sr" style="position:absolute;left:-999px">Test set results for the three models</caption>
+          <thead><tr><th scope="col">Model</th><th scope="col">Accuracy</th><th scope="col">Precision</th><th scope="col">Recall</th><th scope="col">F1</th><th scope="col">AUC</th></tr></thead>
+          <tbody>
+            <tr><th scope="row" style="text-align:left;font-weight:500">Custom CNN</th><td>89.10%</td><td>0.9149</td><td>0.9103</td><td>0.9126</td><td>0.9399</td></tr>
+            <tr><th scope="row" style="text-align:left;font-weight:500">ResNet-50</th><td>78.04%</td><td>0.7949</td><td>0.8744</td><td>0.8327</td><td>0.8523</td></tr>
+            <tr class="win"><th scope="row" style="text-align:left">DenseNet121 (in production)</th><td>89.74%</td><td>0.8995</td><td>0.9410</td><td>0.9198</td><td>0.9589</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <figure class="shot">
+        <button type="button" data-zoom="images/pneumoinsight/roc.webp" data-alt="ROC curves comparing the custom CNN, ResNet-50 and DenseNet121"><img src="images/pneumoinsight/roc.webp" alt="ROC curves comparing the custom CNN (AUC 0.9399), ResNet-50 (AUC 0.8523) and DenseNet121 (AUC 0.9589)" loading="lazy" width="826" height="664"></button>
+        <figcaption>ROC curves on the test set. The DenseNet121 curve (green) sits closest to the top left corner.</figcaption>
+      </figure>
+
+      <h3>Explanations a clinician can inspect</h3>
+      <p>Guided Grad-CAM turns each prediction into a heatmap over the original X-ray. Next to it the app shows the diagnosis, the confidence score and a tier (high, moderate or low), so uncertain cases stand out. The PDF report repeats all of this in plain language for the patient file.</p>
+      <div class="pair">
+        <figure class="shot" style="margin-top:1.6rem">
+          <button type="button" data-zoom="images/pneumoinsight/analysis.webp" data-alt="Result view with diagnosis, confidence tier, and Grad-CAM overlay"><img src="images/pneumoinsight/analysis.webp" alt="Result view showing pneumonia at 99.97% confidence, high confidence tier, model DenseNet121, with the X-ray beside its Grad-CAM overlay" loading="lazy" width="1400" height="707"></button>
+          <figcaption>The result view: diagnosis, confidence, tier and heatmap.</figcaption>
+        </figure>
+        <figure class="shot" style="margin-top:1.6rem">
+          <button type="button" data-zoom="images/pneumoinsight/report.webp" data-alt="Generated PDF report with the explainability analysis"><img src="images/pneumoinsight/report.webp" alt="Generated PDF report showing the X-ray, the Grad-CAM overlay and a written explainability analysis" loading="lazy" width="1223" height="865"></button>
+          <figcaption>The exported PDF report.</figcaption>
+        </figure>
+      </div>
+
+      <h3>Built as a full application</h3>
+      <p>The model sits inside a Flask application with role-based access for admins, doctors, radiologists and nurses. It keeps a patient history that records who ran each assessment and when, generates PDF reports with ReportLab and exports analytics to Excel.</p>
+      <div class="tiers" role="group" aria-label="Three-tier architecture of PneumoInsight">
+        <div class="tier">
+          <h4>Presentation<span>Browser</span></h4>
+          <ul>
+            <li><b>login.html</b><small>Authentication</small></li>
+            <li><b>dashboard.html</b><small>X-ray upload form</small></li>
+            <li><b>history.html</b><small>Patient records</small></li>
+            <li><b>admin.html</b><small>User management</small></li>
+          </ul>
+        </div>
+        <div class="tier">
+          <h4>Application<span>Flask server</span></h4>
+          <ul>
+            <li><b>Inference engine</b><small>DenseNet121 prediction and confidence</small></li>
+            <li><b>Grad-CAM module</b><small>GradientTape heatmaps with an OpenCV overlay</small></li>
+            <li><b>Ten routes</b><small>Login, dashboard, history and more</small></li>
+            <li><b>Reports</b><small>PDF with ReportLab, Excel with Pandas</small></li>
+          </ul>
+        </div>
+        <div class="tier">
+          <h4>Data<span>Storage</span></h4>
+          <ul>
+            <li><b>SQLite database</b><small>User and patient record tables</small></li>
+            <li><b>File storage</b><small>Original X-rays and Grad-CAM overlays</small></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <div role="tablist" aria-label="Technical diagrams">
+          <button role="tab" id="t1" aria-selected="true" aria-controls="p1" type="button">Prediction flow</button>
+          <button role="tab" id="t2" aria-selected="false" aria-controls="p2" type="button" tabindex="-1">Custom CNN design</button>
+          <button role="tab" id="t3" aria-selected="false" aria-controls="p3" type="button" tabindex="-1">App screens</button>
+        </div>
+        <div role="tabpanel" id="p1" aria-labelledby="t1" class="panel">
+          <figure class="shot" style="margin:0">
+            <button type="button" data-zoom="images/pneumoinsight/flow.webp" data-alt="Flowchart of a prediction request"><img src="images/pneumoinsight/flow.webp" alt="Flowchart: the clinician submits the form, the file is sanitized and saved, the image is resized and rescaled, DenseNet121 predicts, a threshold of 0.5 sets the label, then the confidence, patient ID and Grad-CAM are generated before the record is saved" loading="lazy" width="626" height="822"></button>
+          </figure>
+          <p>Every upload follows the same path. The file name is sanitized, the image is resized to 224 by 224 and rescaled, and DenseNet121 outputs a sigmoid score. Above 0.5 the result is pneumonia, otherwise normal. The app then formats the confidence, assigns a patient ID, generates the Grad-CAM heatmap and saves the record before returning to the history view.</p>
+        </div>
+        <div role="tabpanel" id="p2" aria-labelledby="t2" class="panel" hidden>
+          <figure class="shot" style="margin:0">
+            <button type="button" data-zoom="images/pneumoinsight/cnn.webp" data-alt="Custom CNN architecture"><img src="images/pneumoinsight/cnn.webp" alt="Custom CNN architecture: four convolution blocks with 32, 64, 128 and 256 filters, then a 512-unit dense layer and a sigmoid output" loading="lazy" width="1000" height="777"></button>
+          </figure>
+          <p>The custom CNN stacks four convolution blocks of 32, 64, 128 and 256 filters, each with batch normalization and max pooling. The first two blocks learn low-level features and the last two learn high-level ones, with dropout rising from 0.3 to 0.4. A 512-unit dense layer with 0.5 dropout feeds the sigmoid output.</p>
+        </div>
+        <div role="tabpanel" id="p3" aria-labelledby="t3" class="panel wide" hidden>
+          <figure class="shot" style="margin:0">
+            <button type="button" data-zoom="images/pneumoinsight/history.webp" data-alt="Patient diagnostic history"><img src="images/pneumoinsight/history.webp" alt="Patient diagnostic history table with patient IDs, results, confidence scores, tiers and PDF buttons. Names are blurred." loading="lazy" width="1400" height="693"></button>
+            <figcaption>Patient history with result, confidence, tier and one-click PDF reports. Patient names are blurred on this page.</figcaption>
+          </figure>
+          <figure class="shot">
+            <button type="button" data-zoom="images/pneumoinsight/login.webp" data-alt="Login screen"><img src="images/pneumoinsight/login.webp" alt="PneumoInsight AI clinical portal login screen" loading="lazy" width="1400" height="693"></button>
+            <figcaption>The clinical portal login.</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <h3>Documentation</h3>
+      <p>I wrote the project up as a six-chapter thesis and an IEEE-style technical paper, and presented it in a 17-slide oral defense.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="projects">
+  <div class="wrap">
+    <div class="head">
+      <h2>Data projects</h2>
+      <p>Python, SQL, Excel, Power BI and Tableau, from raw data to a finished view.</p>
+    </div>
+    <ol class="proj body">
+      <li>
+        <a class="thumb" href="https://github.com/blessingchikumbirike/Projects/tree/main/Python/WebScraping/Wikipedia%20Biggest%20Companies%20WebScraping" tabindex="-1" aria-hidden="true"><img src="images/Wikipedia.png" alt="" loading="lazy"></a>
+        <div>
+          <h3>Scraping Wikipedia's top 100 companies</h3>
+          <p class="tools">Python, web scraping</p>
+          <p>Scrapes the list of the world's largest companies from Wikipedia and saves it as a clean CSV, ready for analysis.</p>
+          <a class="btn quiet small" href="https://github.com/blessingchikumbirike/Projects/tree/main/Python/WebScraping/Wikipedia%20Biggest%20Companies%20WebScraping">View on GitHub</a>
+        </div>
+      </li>
+      <li>
+        <a class="thumb" href="https://github.com/blessingchikumbirike/Projects/blob/main/MySQL/MySQL%20Data%20Cleaning.%20World%20Layoffs%20Dataset.sql" tabindex="-1" aria-hidden="true"><img src="images/SqlDataCleaning.png" alt="" loading="lazy"></a>
+        <div>
+          <h3>Cleaning the world layoffs dataset</h3>
+          <p class="tools">MySQL</p>
+          <p>Removes duplicates, standardizes values, handles nulls and blanks, and drops unneeded columns so the data is safe to analyze.</p>
+          <a class="btn quiet small" href="https://github.com/blessingchikumbirike/Projects/blob/main/MySQL/MySQL%20Data%20Cleaning.%20World%20Layoffs%20Dataset.sql">View on GitHub</a>
+        </div>
+      </li>
+      <li>
+        <a class="thumb" href="https://github.com/blessingchikumbirike/Projects/blob/main/MySQL/MySQL%20Exploratory%20Data%20Analysis.%20World%20Layoffs%20Dataset.sql" tabindex="-1" aria-hidden="true"><img src="images/EDA.jpg" alt="" loading="lazy"></a>
+        <div>
+          <h3>Exploring the world layoffs dataset</h3>
+          <p class="tools">MySQL, exploratory analysis</p>
+          <p>Ranks countries and years by layoffs. The United States led with 256,559 layoffs between 2020 and 2023, and 2022 was the peak year at 160,661.</p>
+          <a class="btn quiet small" href="https://github.com/blessingchikumbirike/Projects/blob/main/MySQL/MySQL%20Exploratory%20Data%20Analysis.%20World%20Layoffs%20Dataset.sql">View on GitHub</a>
+        </div>
+      </li>
+      <li>
+        <a class="thumb" href="https://public.tableau.com/app/profile/blessing.chikumbirike/viz/AirBnBFullProject_17300965067580/Dashboard1?publish=yes" tabindex="-1" aria-hidden="true"><img src="images/Tableau.png" alt="" loading="lazy"></a>
+        <div>
+          <h3>Airbnb revenue dashboard</h3>
+          <p class="tools">Tableau</p>
+          <p>Shows how revenue moves through the year: lowest in January, climbing from February to April and peaking in December. It recommends listing in early February or running low-season promotions.</p>
+          <a class="btn quiet small" href="https://public.tableau.com/app/profile/blessing.chikumbirike/viz/AirBnBFullProject_17300965067580/Dashboard1?publish=yes">View on Tableau Public</a>
+        </div>
+      </li>
+      <li>
+        <a class="thumb" href="https://github.com/blessingchikumbirike/Projects/tree/main/PowerBI" tabindex="-1" aria-hidden="true"><img src="images/PowerBI.png" alt="" loading="lazy"></a>
+        <div>
+          <h3>Salary survey dashboard</h3>
+          <p class="tools">Power BI</p>
+          <p>Built from a professional survey. It compares job titles with salaries, shows preferred programming languages by profession and uses gauges for salary satisfaction. Click a job title to filter every chart.</p>
+          <a class="btn quiet small" href="https://github.com/blessingchikumbirike/Projects/tree/main/PowerBI">View on GitHub</a>
+        </div>
+      </li>
+      <li>
+        <a class="thumb" href="https://github.com/blessingchikumbirike/Projects/blob/main/Excel/Excel%20Full%20Project%20Kaggle%20Bike%20Sales%20Dataset.xlsx" tabindex="-1" aria-hidden="true"><img src="images/Bikes.png" alt="" loading="lazy"></a>
+        <div>
+          <h3>Bike sales analysis</h3>
+          <p class="tools">Excel</p>
+          <p>Cleans, analyzes and visualizes a Kaggle bike sales dataset. Covers average income per purchase, customer age brackets and commute distance, with filters for marital status, region and education.</p>
+          <a class="btn quiet small" href="https://github.com/blessingchikumbirike/Projects/blob/main/Excel/Excel%20Full%20Project%20Kaggle%20Bike%20Sales%20Dataset.xlsx">View on GitHub</a>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec" id="about">
+  <div class="wrap">
+    <div class="head"><h2>About</h2></div>
+    <div class="body">
+      <p>I graduated from the University of Zimbabwe with a BSc Honours in Data Science and Informatics (Upper Second Class). I like projects that run all the way from raw data to something a non-technical person can use, and I write the documentation to match.</p>
+      <p>I'm looking for remote junior data scientist, machine learning engineer, computer vision engineer or Python and Flask backend roles.</p>
+
+      <dl class="skills" style="margin-top:2.2rem">
+        <div><dt>Programming and web</dt><dd>Python, Flask, SQLAlchemy, Flask-Migrate, REST APIs</dd></div>
+        <div><dt>Machine learning</dt><dd>CNNs, DenseNet121, ResNet-50, custom architectures, transfer learning, TensorFlow and Keras, Guided Grad-CAM, model evaluation and explainability</dd></div>
+        <div><dt>Data analysis</dt><dd>Excel (advanced), Pandas, NumPy, exploratory analysis, data cleaning and preparation, web scraping with BeautifulSoup</dd></div>
+        <div><dt>Databases</dt><dd>PostgreSQL, MySQL, SQL, query optimization, Alembic</dd></div>
+        <div><dt>Visualization and BI</dt><dd>Power BI, Tableau, Excel dashboards</dd></div>
+        <div><dt>Cloud and tools</dt><dd>AWS, Git and GitHub, VS Code</dd></div>
+      </dl>
+
+      <div class="edu">
+        <b>BSc (Honours) Data Science and Informatics</b>, Upper Second Class (2.1)<br>
+        University of Zimbabwe, Department of Analytics and Informatics, 2026
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec contact" id="contact">
+  <div class="wrap">
+    <div class="head"><h2>Contact</h2><p>Harare, Zimbabwe. Available for remote work.</p></div>
+    <div class="body">
+      <p>If you're hiring or want to see PneumoInsight running, write to me.</p>
+      <a class="mail" href="mailto:chikumbirikeblessing@gmail.com">chikumbirikeblessing@gmail.com</a>
+      <ul>
+        <li><a href="https://www.linkedin.com/in/blessingchikumbirike/">LinkedIn</a></li>
+        <li><a href="https://github.com/blessingchikumbirike">GitHub</a></li>
+        <li><a href="Blessing_Chikumbirike_CV.pdf" download>CV (PDF)</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">&copy; 2026 Blessing Chikumbirike</div></footer>
+
+<dialog id="zoom" aria-label="Enlarged image">
+  <img alt="">
+  <form method="dialog"><button class="btn small">Close</button></form>
+</dialog>
+
+<script>
+(function(){
+  /* hero reveal: one sweep on load, then the visitor takes over */
+  var box=document.getElementById('compare'),input=box.querySelector('input');
+  function set(v){box.style.setProperty('--pos',v+'%');input.value=v}
+  input.addEventListener('input',function(){stop=true;set(input.value)});
+  var stop=false,reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce){set(50)}else{
+    var t0=null,from=100,to=48,dur=1500;
+    setTimeout(function(){requestAnimationFrame(function step(t){
+      if(stop)return; if(t0===null)t0=t;
+      var p=Math.min((t-t0)/dur,1),e=1-Math.pow(1-p,3);
+      set(from+(to-from)*e); if(p<1)requestAnimationFrame(step);
+    })},500);
+  }
+
+  /* tabs */
+  var tabs=[].slice.call(document.querySelectorAll('[role=tab]'));
+  function pick(tab){
+    tabs.forEach(function(t){
+      var on=t===tab;
+      t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden=!on;
+    });
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){pick(t)});
+    t.addEventListener('keydown',function(e){
+      var n=e.key==='ArrowRight'?i+1:e.key==='ArrowLeft'?i-1:null;
+      if(n===null)return; n=(n+tabs.length)%tabs.length; tabs[n].focus();pick(tabs[n]);e.preventDefault();
+    });
+  });
+
+  /* image zoom */
+  var dlg=document.getElementById('zoom'),big=dlg.querySelector('img');
+  document.querySelectorAll('[data-zoom]').forEach(function(b){
+    b.addEventListener('click',function(){
+      big.src=b.getAttribute('data-zoom');big.alt=b.getAttribute('data-alt')||'';
+      if(dlg.showModal)dlg.showModal();
+    });
+  });
+  dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close()});
+})();
+</script>
+</body>
+</html>
